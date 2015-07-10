@@ -1,0 +1,55 @@
+<html ng-app="listApp">
+	<head>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	</head>
+	<body ng-controller="listCtrl as list">
+		<div id="controls">
+			
+			<button ng-click="list.showList('customers')">Hide Customers</button>
+			<button ng-click="list.showList('goods')">Hide Goods</button>
+			
+			<div style="width:250px; float:left;">
+				<form ng-submit="list.addNew('customer')">
+					<div>Name<input  type="text"  ng-model="list.newCustomer.name" required></div>
+					<div>City<input  type="text"  ng-model="list.newCustomer.city" required></div>
+					<!-- <div>Age<input   type="text"  ng-model="list.newCustomer.age"></div> -->
+					<div>Image URL<input type="text"  ng-model="list.newCustomer.img"></div>
+					<button >Add Customer</button>
+				</form>
+			</div>
+			
+			<div style="width:250px; float: left;">
+				<form ng-submit="list.addNew('good')">
+					<div>Name<input type="text"  ng-model="list.newGood.name" required></div>
+					<!-- <div>Price<input type="text" ng-model="list.newGood.price"></div> -->
+					<button>Add Good</button>
+				</form>
+			</div>
+			<div style="width:200px; float:left;"></div>
+		</div>
+		<div id="customers" ng-show="list.showCustomers"  style="width:200px; float:left;">
+			<span>Search by name</span> <input type="text" ng-model="list.searchByName">
+			<span>Number of customers: {{list.customers.length}}</span>
+			<div class="customer" ng-repeat="customer in list.customers track by $index | filter: { name : list.searchByName} ">
+				<img ng-src="{{customer.img}}" width="60px">
+				<li>"{{'User: ' + (customer.name | uppercase)}}"</li>
+				<li>{{customer.city}}</li>
+				<li>{{customer.age}}</li>
+				<button ng-click="list.customers.splice($index,1)">Delete</button> 
+				<br>
+			</div>
+		</div>
+
+		<div id="goods" ng-show="list.showGoods"  style="width:200px; float:left;" >
+			<span>Search by all</span> <input type="text" ng-model="list.searchByAll">
+			<span>Number of goods: {{list.goods.length}}</span>
+			<div class="good" ng-repeat="good in list.goods track by $index | filter: list.searchByAll ">
+				<li>{{good.name}}</li>
+				<li>{{good.price}}</li>
+				<br>
+			</div>
+		</div>
+		
+		<script type="text/javascript" src="app.js"></script>
+	</body>
+</html>
