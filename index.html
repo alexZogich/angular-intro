@@ -30,7 +30,7 @@
 		<div id="customers" ng-show="list.showCustomers"  style="width:200px; float:left;">
 			<span>Search by name</span> <input type="text" ng-model="list.searchByName">
 			<span>Number of customers: {{list.customers.length}}</span>
-			<div class="customer" ng-repeat="customer in list.customers track by $index | filter: { name : list.searchByName} ">
+			<div class="customer" ng-repeat="customer in list.customers | filter: { name : list.searchByName} track by $index ">
 				<img ng-src="{{customer.img}}" width="60px">
 				<li>"{{'User: ' + (customer.name | uppercase)}}"</li>
 				<li>{{customer.city}}</li>
@@ -43,7 +43,7 @@
 		<div id="goods" ng-show="list.showGoods"  style="width:200px; float:left;" >
 			<span>Search by all</span> <input type="text" ng-model="list.searchByAll">
 			<span>Number of goods: {{list.goods.length}}</span>
-			<div class="good" ng-repeat="good in list.goods track by $index | filter: list.searchByAll ">
+			<div class="good" ng-repeat="good in list.goods | filter: list.searchByAll track by $index ">
 				<li>{{good.name}}</li>
 				<li>{{good.price}}</li>
 				<br>

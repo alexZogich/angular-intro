@@ -24,7 +24,7 @@ angular.module("listApp",[]).
 		}
 
 		vm.showList = function (list) {
-			console.log(list);
+
 			if (list == "goods"){
 				vm.showGoods = vm.showGoods ? false : true;
 			}
